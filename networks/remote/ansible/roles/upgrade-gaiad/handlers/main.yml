@@ -1,0 +1,5 @@
+---
+
+- name: restart dexd
+  service: name=dexd state=restarted
+

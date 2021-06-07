@@ -1,0 +1,68 @@
+version: '3'
+
+services:
+  dexnode0:
+    container_name: dexnode0
+    image: "tendermint/dexnode"
+    ports:
+      - "26656-26657:26656-26657"
+    environment:
+      - ID=0
+      - LOG=${LOG:-dexd.log}
+    volumes:
+      - ./build:/dexd:Z
+    networks:
+      localnet:
+        ipv4_address: 192.168.10.2
+
+  dexnode1:
+    container_name: dexnode1
+    image: "tendermint/dexnode"
+    ports:
+      - "26659-26660:26656-26657"
+    environment:
+      - ID=1
+      - LOG=${LOG:-dexd.log}
+    volumes:
+      - ./build:/dexd:Z
+    networks:
+      localnet:
+        ipv4_address: 192.168.10.3
+
+  dexnode2:
+    container_name: dexnode2
+    image: "tendermint/dexnode"
+    environment:
+      - ID=2
+      - LOG=${LOG:-dexd.log}
+    ports:
+      - "26661-26662:26656-26657"
+    volumes:
+      - ./build:/dexd:Z
+    networks:
+      localnet:
+        ipv4_address: 192.168.10.4
+
+  dexnode3:
+    container_name: dexnode3
+    image: "tendermint/dexnode"
+    environment:
+      - ID=3
+      - LOG=${LOG:-dexd.log}
+    ports:
+      - "26663-26664:26656-26657"
+    volumes:
+      - ./build:/dexd:Z
+    networks:
+      localnet:
+        ipv4_address: 192.168.10.5
+
+networks:
+  localnet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      -
+        subnet: 192.168.10.0/16
+

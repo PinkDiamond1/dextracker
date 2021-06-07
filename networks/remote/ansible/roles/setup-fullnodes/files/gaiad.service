@@ -1,0 +1,17 @@
+[Unit]
+Description=dexd
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Restart=on-failure
+User=dexd
+Group=dexd
+PermissionsStartOnly=true
+ExecStart=/usr/bin/dexd start
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target
+
